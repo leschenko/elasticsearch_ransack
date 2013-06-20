@@ -11,13 +11,13 @@ module TireRansack
   self.predicates = []
 
   BASE_PREDICATES = [
-      ['_eq', {query: proc { |attr, v| {term: {attr => v}} }}],
-      ['_in', {query: proc { |attr, v| {terms: {attr => TireRansack.val_to_array(v)}} }}],
-      ['_in_all', {query: proc { |attr, v| {terms: {attr => TireRansack.val_to_array(v), execution: 'and'}} }}],
-      ['_gt', {query: proc { |attr, v| {range: {attr => {gt: v}}} }}],
-      ['_lt', {query: proc { |attr, v| {range: {attr => {lt: v}}} }}],
-      ['_gteq', {query: proc { |attr, v| {range: {attr => {gte: v}}} }}],
-      ['_lteq', {query: proc { |attr, v| {range: {attr => {lte: v}}} }}]
+      ['eq', {query: proc { |attr, v| {term: {attr => v}} }}],
+      ['in', {query: proc { |attr, v| {terms: {attr => TireRansack.val_to_array(v)}} }}],
+      ['in_all', {query: proc { |attr, v| {terms: {attr => TireRansack.val_to_array(v), execution: 'and'}} }}],
+      ['gt', {query: proc { |attr, v| {range: {attr => {gt: v}}} }}],
+      ['lt', {query: proc { |attr, v| {range: {attr => {lt: v}}} }}],
+      ['gteq', {query: proc { |attr, v| {range: {attr => {gte: v}}} }}],
+      ['lteq', {query: proc { |attr, v| {range: {attr => {lte: v}}} }}]
   ]
 
   class << self

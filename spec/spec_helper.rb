@@ -53,11 +53,17 @@ class ActiveModelBase
   end
 end
 
-class ActiveModelTireBase < ActiveModelBase
+
+class ModelSearch < ActiveModelBase
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
   include TireRansack::Model
+
+  mapping do
+    indexes :id, type: 'integer'
+    indexes :int_attr, type: 'integer'
+  end
 
   def self.setup_index
     tire.index.delete
@@ -69,19 +75,19 @@ class ActiveModelTireBase < ActiveModelBase
   def self.test_data
     [
         {
-           text: 'alex test', text_ru: 'alex rus', text_en: 'alex eng',
-           one_assoc_id: 1, many_assoc_ids: [2, 3, 4],
-           int_attr: 10, float_attr: 5.5, created_at: 1.day.ago
+            id: 1, text: 'alex test', text_ru: 'alexandr',
+            one_assoc_id: 1, many_assoc_ids: [2, 3, 4],
+            int_attr: 10, float_attr: 5.5, created_at: 1.day.ago
         },
         {
-           text: 'andrey black', text_ru: 'andrey rus', text_en: 'andrey eng',
-           one_assoc_id: 2, many_assoc_ids: [3, 4, 5, 6],
-           int_attr: 20, float_attr: 27.5, created_at: 1.month.ago
+            id: 2, text: 'andrey black', text_ru: 'andrey rus',
+            one_assoc_id: 2, many_assoc_ids: [3, 4, 5, 6],
+            int_attr: 20, float_attr: 27.5, created_at: 1.month.ago
         },
         {
-           text: 'mike test', text_ru: 'mike rus', text_en: 'mike eng',
-           one_assoc_id: 5, many_assoc_ids: [10, 14, 17],
-           int_attr: 80, float_attr: 7.5, created_at: 1.hour.ago
+            id: 3, text: 'mike test', text_ru: 'mike rus',
+            one_assoc_id: 2, many_assoc_ids: [10, 14, 17],
+            int_attr: 80, float_attr: 7.5, created_at: 1.hour.ago
         }
     ]
   end
@@ -93,4 +99,5 @@ class ActiveModelTireBase < ActiveModelBase
       u.save
     end
   end
+
 end

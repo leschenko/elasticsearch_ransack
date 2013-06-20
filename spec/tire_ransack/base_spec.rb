@@ -1,13 +1,10 @@
 require 'spec_helper'
 
-class ModelBase < ActiveModelTireBase
-end
-
 describe TireRansack do
-  subject { ModelBase }
+  subject { ModelSearch }
 
   before :all do
-    ModelBase.setup_index
+    ModelSearch.setup_index
   end
 
   it 'add tire_ransack method' do
