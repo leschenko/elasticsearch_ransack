@@ -4,7 +4,7 @@ ElasticRansack provides searching to your elasticsearch models like Ransack or M
 Your just create search form with `name_cont` or `created_at_gt` fields and ElasticRansack build a search query for you.
 It is compatible with most of the Ransack helper methods and predicates.
 
-[![Build Status](https://travis-ci.org/leschenko/elastic_ransack)](https://travis-ci.org/leschenko/elastic_ransack)
+[![Build Status](https://travis-ci.org/leschenko/elastic_ransack.png?branch=master)](https://travis-ci.org/leschenko/elastic_ransack)
 
 ElasticRansack uses [Tire](https://github.com/karmi/tire) and [Elasticsearch](http://www.elasticsearch.org/) for searching.
 
