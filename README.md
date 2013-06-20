@@ -47,14 +47,14 @@ User.elastic_ransack({name_cont: 'alex', role_id_eq: 1, state_id_in: [2, 3], cre
    search against _all fields
 
 ### Predicates
-`_cont`    contains string value
-`_eq`      equal value
-`_in`      include any of the values
-`_in_all`  include all values
-`_gt`      greater then value
-`_lt`      less then value
-`_gteq`    greater or equal the value
-`_lteq `   less or equal the value
+* `_cont`    contains string value
+* `_eq`      equal value
+* `_in`      include any of the values
+* `_in_all`  include all values
+* `_gt`      greater then value
+* `_lt`      less then value
+* `_gteq`    greater or equal the value
+* `_lteq `   less or equal the value
 
 ### Examples
 
@@ -66,7 +66,7 @@ Product.elastic_ransack(q_cont: 'table')
 Product.elastic_ransack(s: 'price desc')
 ```
 
-For search on localized attributes like 'name_en' use 'translations_' prefixed field:
+For search on localized attributes like `name_en` use `translations_` prefixed field:
 
 ```ruby
 Product.elastic_ransack({translations_name_cont: 'chair'}, globalize: true)

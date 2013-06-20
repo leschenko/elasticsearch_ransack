@@ -9,7 +9,7 @@ Gem::Specification.new do |spec|
   spec.authors       = ['Alex Leschenko']
   spec.email         = %w(leschenko.al@gmail.com)
   spec.summary       = %q{Search conditions adapter for elasticsearch models like ransack}
-  spec.description   = %q{Search conditions using predicates such as 'name_cont' or 'created_at_gt' for elasticsearch models}
+  spec.description   = %q{Search with conditions using predicates such as 'name_cont' or 'created_at_gt' for elasticsearch models}
   spec.homepage      = 'https://github.com/leschenko/elastic_ransack'
   spec.license       = 'MIT'
 
