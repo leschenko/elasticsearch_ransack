@@ -6,6 +6,13 @@ describe 'predicates' do
     @model.setup_index
   end
 
+  it 'delegate methods to model' do
+    [:results, :each, :empty?, :size, :[], :total_entries, :per_page, :total_pages,
+     :current_page, :previous_page, :next_page, :offset, :out_of_bounds?].each do |meth|
+      @model.elastic_ransack.should.respond_to?(meth)
+    end
+  end
+
   context 'string fields' do
     it '_cont' do
       @model.elastic_ransack(text_cont: 'test').map(&:id).map(&:to_i).should =~ [1, 3]

@@ -7,6 +7,20 @@ describe ElasticRansack do
     ModelSearch.setup_index
   end
 
+  it 'setup yields ElasticRansack' do
+    ElasticRansack.setup do |config|
+      config.should == ElasticRansack
+    end
+  end
+
+  it 'add predicates' do
+    expect do
+      ElasticRansack.add_predicate 'test', {query: proc {}}
+    end.to change { ElasticRansack.predicates.size }.by(1)
+
+    ElasticRansack.predicates.last.name.should == 'test'
+  end
+
   it 'add elastic_ransack method' do
     should respond_to(:elastic_ransack)
   end
