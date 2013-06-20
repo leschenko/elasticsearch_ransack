@@ -1,7 +1,11 @@
 # TireRansack
 
 TireRansack provides condition predicate searching to your elasticsearch models like ransack or meta_search gems.
-Inspired by [Ransack](https://github.com/ernie/ransack) gem
+Your can just create serach form with `name_cont` or `created_at_gt` fields and tire_ransack build a search query for you.
+
+It uses [Tire](https://github.com/karmi/tire) and [Elasticsearch](http://www.elasticsearch.org/) for searching.
+
+Inspired by [Ransack](https://github.com/ernie/ransack) gem.
 
 ## Installation
 
@@ -17,18 +21,21 @@ Or install it yourself as:
 
     $ gem install tire_ransack
 
-## Basic Usage
+## Usage
 
-Specify attributes for autocompletion. By default, this is `name` attribute:
+Include TireRansack extension to your model:
 
 ```ruby
 class User < ActiveRecord::Base
-  ac_field :full_name
+  include TireRansack::Model
 end
 ```
-## Usage
 
-TODO: Write usage instructions here
+Search with `tire_ransack` method. It return `Tire::Results::Collection` instance:
+
+```ruby
+User.tire_ransack({name_cont: 'alex', role_id_eq: 1, state_id_in: [2, 3], created_at_gt: 1.day.ago})
+```
 
 ## Contributing
 
