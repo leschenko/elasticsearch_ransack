@@ -1,6 +1,7 @@
 # TireRansack
 
-TODO: Write a gem description
+TireRansack provides condition predicate searching to your elasticsearch models like ransack or meta_search gems.
+Inspired by [Ransack](https://github.com/ernie/ransack) gem
 
 ## Installation
 
@@ -16,6 +17,15 @@ Or install it yourself as:
 
     $ gem install tire_ransack
 
+## Basic Usage
+
+Specify attributes for autocompletion. By default, this is `name` attribute:
+
+```ruby
+class User < ActiveRecord::Base
+  ac_field :full_name
+end
+```
 ## Usage
 
 TODO: Write usage instructions here
