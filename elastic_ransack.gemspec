@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = ElasticRansack::VERSION
   spec.authors       = ['Alex Leschenko']
   spec.email         = %w(leschenko.al@gmail.com)
-  spec.summary       = %q{Conditions searching adapter for elasticsearch models like ransack}
-  spec.description   = %q{Conditions searching using predicates such as 'name_cont' or 'created_at_gt' for elasticsearch models}
+  spec.summary       = %q{Search conditions adapter for elasticsearch models like ransack}
+  spec.description   = %q{Search conditions using predicates such as 'name_cont' or 'created_at_gt' for elasticsearch models}
   spec.homepage      = 'https://github.com/leschenko/elastic_ransack'
   spec.license       = 'MIT'
 
