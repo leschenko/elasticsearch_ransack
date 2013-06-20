@@ -1,13 +1,13 @@
-module TireRansack
+module ElasticRansack
   class Search
-    include ::TireRansack::Naming
+    include ::ElasticRansack::Naming
     include Enumerable
 
-    attr_reader :options, :search_options, :model, :tire_results, :sorts, :globalize
+    attr_reader :options, :search_options, :model, :search_results, :sorts, :globalize
 
-    delegate :results, :each, :empty?, :size, :[], to: :tire_results
+    delegate :results, :each, :empty?, :size, :[], to: :search_results
     delegate :total_entries, :per_page, :total_pages, :current_page, :previous_page, :next_page, :offset, :out_of_bounds?,
-             to: :tire_results
+             to: :search_results
 
     alias_method :klass, :model
 
@@ -36,7 +36,7 @@ module TireRansack
     end
 
     def search
-      @tire_results ||= begin
+      @search_results ||= begin
         that = self
         query_string = []
         tire.search(@search_options) do
@@ -68,7 +68,7 @@ module TireRansack
               v = that.format_value(v)
             end
 
-            TireRansack.predicates.each do |predicate|
+            ElasticRansack.predicates.each do |predicate|
               if k =~ predicate.regexp
                 and_filters << predicate.query.call($1, v)
               end

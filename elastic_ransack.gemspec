@@ -1,16 +1,16 @@
 # coding: utf-8
 lib = File.expand_path('../lib', __FILE__)
 $LOAD_PATH.unshift(lib) unless $LOAD_PATH.include?(lib)
-require 'tire_ransack/version'
+require 'elastic_ransack/version'
 
 Gem::Specification.new do |spec|
-  spec.name          = 'tire_ransack'
-  spec.version       = TireRansack::VERSION
+  spec.name          = 'elastic_ransack'
+  spec.version       = ElasticRansack::VERSION
   spec.authors       = ['Alex Leschenko']
   spec.email         = %w(leschenko.al@gmail.com)
   spec.summary       = %q{Conditions searching adapter for elasticsearch models like ransack}
   spec.description   = %q{Conditions searching using predicates such as 'name_cont' or 'created_at_gt' for elasticsearch models}
-  spec.homepage      = 'https://github.com/leschenko/tire_ransack'
+  spec.homepage      = 'https://github.com/leschenko/elastic_ransack'
   spec.license       = 'MIT'
 
   spec.files         = `git ls-files`.split($/)

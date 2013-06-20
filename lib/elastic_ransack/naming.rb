@@ -1,4 +1,4 @@
-module TireRansack
+module ElasticRansack
   module Naming
 
     def self.included(base)
@@ -32,11 +32,11 @@ module TireRansack
       @plural = 'searches'.freeze
       @element = 'search'.freeze
       @human = 'Search'.freeze
-      @collection = 'tire_ransack/searches'.freeze
+      @collection = 'elastic_ransack/searches'.freeze
       @partial_path = "#{@collection}/#{@element}".freeze
       @param_key = 'q'.freeze
       @route_key = 'searches'.freeze
-      @i18n_key = :tire_ransack
+      @i18n_key = :elastic_ransack
     end
   end
 
@@ -46,7 +46,7 @@ module TireRansack
     end
 
     def i18n_scope
-      :tire_ransack
+      :elastic_ransack
     end
   end
 end

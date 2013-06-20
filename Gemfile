@@ -1,4 +1,4 @@
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in tire_ransack.gemspec
+# Specify your gem's dependencies in elastic_ransack.gemspec
 gemspec

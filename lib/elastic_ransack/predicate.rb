@@ -1,4 +1,4 @@
-module TireRansack
+module ElasticRansack
   class Predicate
     attr_reader :name, :regexp, :query
 

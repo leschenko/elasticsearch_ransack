@@ -1,7 +1,7 @@
 require 'active_model'
 require 'tire'
 require 'active_support/core_ext'
-require 'tire_ransack'
+require 'elastic_ransack'
 
 Tire.configure do
   logger 'tmp/elasticsearch.log'  # Commented out logger line here so that it doesn't break specs when tmp directory doesn't exist.
@@ -58,7 +58,7 @@ class ModelSearch < ActiveModelBase
   include Tire::Model::Search
   include Tire::Model::Callbacks
 
-  include TireRansack::Model
+  include ElasticRansack::Model
 
   mapping do
     indexes :id, type: 'integer'

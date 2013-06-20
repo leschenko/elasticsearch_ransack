@@ -1,4 +1,4 @@
-module TireRansack
+module ElasticRansack
   module Model
 
     def self.included(base)
@@ -28,21 +28,21 @@ module TireRansack
       # === search_options
       # [:globalize]
       #   For search on localized attributes like 'name_en' via 'translations_' prefixed field
-      #   example: <code>User.tire_ransack({translations_name_cont: 'text'}, globalize: true)</code>
+      #   example: <code>User.elastic_ransack({translations_name_cont: 'text'}, globalize: true)</code>
       #   will search on 'name_en' field (depending on current locale)
       #
       # === Examples
-      #   Product.tire_ransack(name_cont: 'alex', category_id_eq: 1, tag_ids_in: [2, 3])
-      #   Product.tire_ransack(tag_ids_in: '2,3,4')
-      #   Product.tire_ransack(created_at_gt: 1.day.ago)
-      #   Product.tire_ransack(q_cont: 'table')
-      #   Product.tire_ransack(s: 'price desc')
-      #   Product.tire_ransack({translations_name_cont: 'chair'}, globalize: true)
+      #   Product.elastic_ransack(name_cont: 'alex', category_id_eq: 1, tag_ids_in: [2, 3])
+      #   Product.elastic_ransack(tag_ids_in: '2,3,4')
+      #   Product.elastic_ransack(created_at_gt: 1.day.ago)
+      #   Product.elastic_ransack(q_cont: 'table')
+      #   Product.elastic_ransack(s: 'price desc')
+      #   Product.elastic_ransack({translations_name_cont: 'chair'}, globalize: true)
       #
-      def tire_ransack(options={}, search_options={})
-        tire_ransack = Search.new(self, options, search_options)
-        tire_ransack.search
-        tire_ransack
+      def elastic_ransack(options={}, search_options={})
+        elastic_ransack = Search.new(self, options, search_options)
+        elastic_ransack.search
+        elastic_ransack
       end
     end
 
