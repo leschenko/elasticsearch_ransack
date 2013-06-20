@@ -2,6 +2,7 @@
 
 TireRansack provides condition predicate searching to your elasticsearch models like ransack or meta_search gems.
 Your can just create serach form with `name_cont` or `created_at_gt` fields and tire_ransack build a search query for you.
+It is compatible with most of the Ransack helper methods and predicates.
 
 It uses [Tire](https://github.com/karmi/tire) and [Elasticsearch](http://www.elasticsearch.org/) for searching.
 
