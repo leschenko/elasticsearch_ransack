@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = TireRansack::VERSION
   spec.authors       = ['Alex Leschenko']
   spec.email         = %w(leschenko.al@gmail.com)
-  spec.summary       = %q{Conditions searching adapter for elasticsearch like ransack}
-  spec.description   = %q{Conditions searching using predicates like 'name_cont' or 'category_id_in' for elasticsearch models}
+  spec.summary       = %q{Conditions searching adapter for elasticsearch models like ransack}
+  spec.description   = %q{Conditions searching using predicates such as 'name_cont' or 'created_at_gt' for elasticsearch models}
   spec.homepage      = 'https://github.com/leschenko/tire_ransack'
   spec.license       = 'MIT'
 
