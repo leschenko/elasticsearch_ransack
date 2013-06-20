@@ -1,10 +1,10 @@
 # ElasticRansack
 
-ElasticRansack provides searching to your elasticsearch models like ransack or meta_search gems.
-Your can just create search form with `name_cont` or `created_at_gt` fields and elastic_ransack build a search query for you.
+ElasticRansack provides searching to your elasticsearch models like Ransack or MetaSearch gems.
+Your just create search form with `name_cont` or `created_at_gt` fields and ElasticRansack build a search query for you.
 It is compatible with most of the Ransack helper methods and predicates.
 
-It uses [Tire](https://github.com/karmi/tire) and [Elasticsearch](http://www.elasticsearch.org/) for searching.
+ElasticRansack uses [Tire](https://github.com/karmi/tire) and [Elasticsearch](http://www.elasticsearch.org/) for searching.
 
 Inspired by [Ransack](https://github.com/ernie/ransack) gem.
 
@@ -39,12 +39,8 @@ User.elastic_ransack({name_cont: 'alex', role_id_eq: 1, state_id_in: [2, 3], cre
 ```
 
 ### Options
- [:s]
-   sorting column
-   can contain sort mode separated by space
-   example: `id desc`
- [:q_cont]
-   search against _all fields
+* `:s` sorting column, can contain sort mode separated by space, example: `id desc`
+* `:q_cont` search against _all fields
 
 ### Predicates
 * `_cont`    contains string value
