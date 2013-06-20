@@ -46,8 +46,10 @@ module TireRansack
               by s.name, s.dir
             end
           end
+
           that.options.each do |k, v|
             next if v.blank?
+
             if k == 'q_cont' || k == 'q_eq'
               query_string << "#{v.lucene_escape}" if v.present?
               next
@@ -65,27 +67,20 @@ module TireRansack
             else
               v = that.format_value(v)
             end
-            if k =~ /^(.+)_eq$/
-              and_filters << {term: {$1 => v}}
-            elsif k =~ /^(.+)_in$/
-              and_filters << {terms: {$1 => TireRansack.val_to_array(v)}}
-            elsif k =~ /^(.+)_in_all$/
-              and_filters << {terms: {$1 => TireRansack.val_to_array(v), execution: 'and'}}
-            elsif k =~ /^(.+)_gt$/
-              and_filters << {range: {$1 => {gt: v}}}
-            elsif k =~ /^(.+)_lt$/
-              and_filters << {range: {$1 => {lt: v}}}
-            elsif k =~ /^(.+)_gteq$/
-              and_filters << {range: {$1 => {gte: v}}}
-            elsif k =~ /^(.+)_lteq$/
-              and_filters << {range: {$1 => {lte: v}}}
+
+            TireRansack.predicates.each do |predicate|
+              if k =~ predicate.regexp
+                and_filters << predicate.query.call($1, v)
+              end
             end
           end
+
           query { string query_string.join(' ') } unless query_string.blank?
           filter(:and, filters: and_filters) unless and_filters.blank?
         end
       end
     end
+
 
     def translate(*args)
       model.human_attribute_name(args.first)
