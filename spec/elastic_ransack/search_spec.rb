@@ -54,11 +54,11 @@ describe 'predicates' do
     end
 
     it 'date' do
-      @model.elastic_ransack(created_at_gt: Date.yesterday).map(&:id).map(&:to_i).should =~ [1, 3]
+      @model.elastic_ransack(created_at_gt: 3.days.ago.to_date).map(&:id).map(&:to_i).should =~ [1, 3]
     end
 
     it 'date string' do
-      @model.elastic_ransack(created_at_gt: Date.yesterday.strftime('%d.%m.%Y')).map(&:id).map(&:to_i).should =~ [1, 3]
+      @model.elastic_ransack(created_at_gt: 3.days.ago.to_date.strftime('%d.%m.%Y')).map(&:id).map(&:to_i).should =~ [1, 3]
     end
   end
 
@@ -76,11 +76,11 @@ describe 'predicates' do
     end
 
     it 'date' do
-      @model.elastic_ransack(created_at_lt: Date.yesterday).map(&:id).map(&:to_i).should =~ [2]
+      @model.elastic_ransack(created_at_lt: 3.days.ago.to_date).map(&:id).map(&:to_i).should =~ [2]
     end
 
     it 'date string' do
-      @model.elastic_ransack(created_at_lt: Date.yesterday.strftime('%d.%m.%Y')).map(&:id).map(&:to_i).should =~ [2]
+      @model.elastic_ransack(created_at_lt: 3.days.ago.to_date.strftime('%d.%m.%Y')).map(&:id).map(&:to_i).should =~ [2]
     end
   end
 
