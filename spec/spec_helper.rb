@@ -4,7 +4,7 @@ require 'active_support/core_ext'
 require 'elastic_ransack'
 
 Tire.configure do
-  logger 'tmp/elasticsearch.log'  # Commented out logger line here so that it doesn't break specs when tmp directory doesn't exist.
+  logger 'elasticsearch.log'
   url 'http://localhost:9200'
   pretty 1
 end

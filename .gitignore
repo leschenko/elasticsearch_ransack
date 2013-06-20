@@ -20,3 +20,4 @@ tmp
 .rvmrc
 .rspec
 TODO
+elasticsearch.log
