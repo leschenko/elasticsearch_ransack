@@ -68,7 +68,7 @@ For search on localized attributes like `name_en` use `translations_` prefixed f
 Product.elastic_ransack({translations_name_cont: 'chair'}, globalize: true)
 ```
 
-It will search on 'name_en' field (depending on current locale)
+It will search on `name_en` field (depending on current locale)
 
 
 ## Contributing
