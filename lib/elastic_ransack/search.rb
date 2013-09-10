@@ -24,6 +24,7 @@ module ElasticRansack
       @globalize = @search_options.delete(:globalize)
       sorting = @options.delete('s')
       if sorting.blank?
+        add_sort('_score', 'desc')
         add_sort('id', 'desc')
       else
         sorting_split = sorting.split(/\s+/, 2)
