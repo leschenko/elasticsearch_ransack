@@ -17,7 +17,9 @@ module ElasticRansack
       ['gt', {query: proc { |attr, v| {range: {attr => {gt: v}}} }}],
       ['lt', {query: proc { |attr, v| {range: {attr => {lt: v}}} }}],
       ['gteq', {query: proc { |attr, v| {range: {attr => {gte: v}}} }}],
-      ['lteq', {query: proc { |attr, v| {range: {attr => {lte: v}}} }}]
+      ['lteq', {query: proc { |attr, v| {range: {attr => {lte: v}}} }}],
+      ['null', {query: proc { |attr| {missing: {field: attr}} }}],
+      ['present', {query: proc { |attr| {exists: {field: attr}} }}]
   ]
 
   class << self

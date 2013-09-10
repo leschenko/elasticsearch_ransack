@@ -77,17 +77,23 @@ class ModelSearch < ActiveModelBase
         {
             id: 1, text: 'alex test', text_ru: 'alexandr',
             one_assoc_id: 1, many_assoc_ids: [2, 3, 4],
-            int_attr: 10, float_attr: 5.5, created_at: 1.day.ago
+            int_attr: 10, float_attr: 5.5,
+            missing_attr: nil,
+            created_at: 1.day.ago
         },
         {
             id: 2, text: 'andrey black', text_ru: 'andrey rus',
             one_assoc_id: 2, many_assoc_ids: [3, 4, 5, 6],
-            int_attr: 20, float_attr: 27.5, created_at: 1.month.ago
+            int_attr: 20, float_attr: 27.5,
+            missing_attr: [],
+            created_at: 1.month.ago
         },
         {
             id: 3, text: 'mike test', text_ru: 'mike rus',
             one_assoc_id: 2, many_assoc_ids: [10, 14, 17],
-            int_attr: 80, float_attr: 7.5, created_at: 1.hour.ago
+            int_attr: 80, float_attr: 7.5,
+            missing_attr: [1, 3, 3],
+            created_at: 1.hour.ago
         }
     ]
   end

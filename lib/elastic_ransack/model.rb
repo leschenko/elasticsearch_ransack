@@ -23,7 +23,9 @@ module ElasticRansack
       #   '_gt'      greater then value
       #   '_lt'      less then value
       #   '_gteq'    greater or equal the value
-      #   '_lteq '   less or equal the value
+      #   '_lteq'    less or equal the value
+      #   '_null'    field missing
+      #   '_present' field exists
       #
       # === search_options
       # [:globalize]

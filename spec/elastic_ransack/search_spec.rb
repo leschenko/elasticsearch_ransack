@@ -92,4 +92,12 @@ describe 'predicates' do
     @model.elastic_ransack(int_attr_lteq: 20).map(&:id).map(&:to_i).should =~ [1, 2]
   end
 
+  it '_null' do
+    @model.elastic_ransack(missing_attr_null: true).map(&:id).map(&:to_i).should =~ [1, 2]
+  end
+
+  it '_present' do
+    @model.elastic_ransack(missing_attr_present: true).map(&:id).map(&:to_i).should =~ [3]
+  end
+
 end
