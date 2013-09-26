@@ -7,8 +7,9 @@ require 'elastic_ransack/search'
 require 'elastic_ransack/model'
 
 module ElasticRansack
-  mattr_accessor :predicates
+  mattr_accessor :predicates, :integer_fields_regexp
   self.predicates = []
+  self.integer_fields_regexp = /id_/
 
   BASE_PREDICATES = [
       ['eq', {query: proc { |attr, v| {term: {attr => v}} }}],

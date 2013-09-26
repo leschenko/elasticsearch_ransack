@@ -21,6 +21,11 @@ describe ElasticRansack do
     ElasticRansack.predicates.last.name.should == 'test'
   end
 
+  it 'integer fields' do
+    ElasticRansack.should respond_to(:integer_fields_regexp)
+    ElasticRansack.integer_fields_regexp.should == /id_/
+  end
+
   it 'add elastic_ransack method' do
     should respond_to(:elastic_ransack)
   end

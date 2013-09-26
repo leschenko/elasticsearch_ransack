@@ -28,6 +28,12 @@ describe 'predicates' do
     end
   end
 
+  context 'integer fields' do
+    it 'convert integer fields' do
+      @model.elastic_ransack(id_eq: '2 asd').map(&:id).map(&:to_i).should =~ [2]
+    end
+  end
+
   it '_eq' do
     @model.elastic_ransack(one_assoc_id_eq: 2).map(&:id).map(&:to_i).should =~ [2, 3]
   end
