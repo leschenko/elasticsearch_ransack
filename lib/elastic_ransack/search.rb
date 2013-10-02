@@ -42,6 +42,7 @@ module ElasticRansack
         query_string = []
         tire.search(@search_options) do
           and_filters = []
+          not_filters = []
           sort do
             that.sorts.each do |s|
               by s.name, s.dir
@@ -72,13 +73,22 @@ module ElasticRansack
 
             ElasticRansack.predicates.each do |predicate|
               if k =~ predicate.regexp
-                and_filters << predicate.query.call($1, v)
+                key = $1
+                if k =~ /not/
+                  not_filters << predicate.query.call(key.sub('_not', ''), v)
+                else
+                  and_filters << predicate.query.call(key, v)
+                end
+                break
               end
             end
           end
 
           query { string query_string.join(' ') } unless query_string.blank?
           filter(:and, filters: and_filters) unless and_filters.blank?
+          not_filters.each do |filter|
+            filter(:not, filter: filter)
+          end
         end
       end
     end
