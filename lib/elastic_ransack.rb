@@ -12,6 +12,7 @@ module ElasticRansack
   self.integer_fields_regexp = /id_/
 
   BASE_PREDICATES = [
+      ['not_eq', {query: proc { |attr, v| {not: {term: {attr => v}} }}}],
       ['eq', {query: proc { |attr, v| {term: {attr => v}} }}],
       ['in', {query: proc { |attr, v| {terms: {attr => ElasticRansack.val_to_array(v)}} }}],
       ['in_all', {query: proc { |attr, v| {terms: {attr => ElasticRansack.val_to_array(v), execution: 'and'}} }}],
