@@ -106,4 +106,7 @@ describe 'predicates' do
     @model.elastic_ransack(missing_attr_present: true).map(&:id).map(&:to_i).should =~ [3]
   end
 
+  it '_not_eq' do
+    @model.elastic_ransack(text_ru_not_eq: "alexandr").map(&:id).map(&:to_i).should =~ [2, 3]
+  end
 end

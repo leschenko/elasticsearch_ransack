@@ -53,6 +53,7 @@ User.elastic_ransack({name_cont: 'alex', role_id_eq: 1, state_id_in: [2, 3], cre
 * `_lt`      less then value
 * `_gteq`    greater or equal the value
 * `_lteq `   less or equal the value
+* `_not_eq`  not equal value
 
 ### Examples
 

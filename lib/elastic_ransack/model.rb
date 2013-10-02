@@ -26,6 +26,7 @@ module ElasticRansack
       #   '_lteq'    less or equal the value
       #   '_null'    field missing
       #   '_present' field exists
+      #   '_not_eq'  not equal value
       #
       # === search_options
       # [:globalize]
