@@ -50,7 +50,7 @@ module ElasticRansack
 
           that.options.each do |k, v|
             next if v.blank?
-            v = v.to_i if ElasticRansack.integer_fields_regexp =~ k
+            v = ElasticRansack.normalize_integer_vals(k, v)
 
             if k == 'q_cont' || k == 'q_eq'
               query_string << "#{v.lucene_escape}" if v.present?

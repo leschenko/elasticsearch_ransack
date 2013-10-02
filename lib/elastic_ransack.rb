@@ -37,6 +37,11 @@ module ElasticRansack
       return val if val.is_a?(Array)
       val.to_s.split(',').map(&:to_i).reject(&:zero?)
     end
+
+    def normalize_integer_vals(field, val)
+      return val unless ElasticRansack.integer_fields_regexp =~ field
+      val.is_a?(Array) ? val.map(&:to_i) : val.to_i
+    end
   end
 end
 

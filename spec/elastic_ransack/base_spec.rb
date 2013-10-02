@@ -44,4 +44,18 @@ describe ElasticRansack do
       ElasticRansack.val_to_array(nil).should == []
     end
   end
+
+  describe '#normalize_vals' do
+    it 'return value for non integer fields' do
+      ElasticRansack.normalize_integer_vals('test', 'qwe').should == 'qwe'
+    end
+
+    it 'normalize integer field' do
+      ElasticRansack.normalize_integer_vals('test_id_eq', '1 qwe').should == 1
+    end
+
+    it 'normalize integer field for array value' do
+      ElasticRansack.normalize_integer_vals('test_id_eq', ['1 qwe', 2]).should == [1, 2]
+    end
+  end
 end
