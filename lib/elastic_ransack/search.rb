@@ -73,6 +73,7 @@ module ElasticRansack
             ElasticRansack.predicates.each do |predicate|
               if k =~ predicate.regexp
                 and_filters << predicate.query.call($1, v)
+                break
               end
             end
           end
