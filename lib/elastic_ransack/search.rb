@@ -91,9 +91,9 @@ module ElasticRansack
 
     def format_value(v)
       if v =~ DATETIME_REGEXP
-        Time.parse(v)
+        ElasticRansack.datetime_parser.call(v)
       elsif v =~ DATE_REGEXP
-        Date.parse(v)
+        ElasticRansack.datetime_parser.call(v).to_date
       else
         v
       end

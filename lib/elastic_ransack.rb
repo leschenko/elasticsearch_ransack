@@ -7,9 +7,10 @@ require 'elastic_ransack/search'
 require 'elastic_ransack/model'
 
 module ElasticRansack
-  mattr_accessor :predicates, :integer_fields_regexp
+  mattr_accessor :predicates, :integer_fields_regexp, :datetime_parser
   self.predicates = []
   self.integer_fields_regexp = /id_/
+  self.datetime_parser = Time.method(:parse)
 
   BASE_PREDICATES = [
       ['not_eq', {query: proc { |attr, v| {not: {term: {attr => v}} }}}],
@@ -23,6 +24,7 @@ module ElasticRansack
       ['null', {query: proc { |attr| {missing: {field: attr}} }}],
       ['present', {query: proc { |attr| {exists: {field: attr}} }}]
   ]
+
 
   class << self
     def setup
