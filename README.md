@@ -2,13 +2,13 @@
 
 ElasticRansack provides searching to your elasticsearch models like Ransack or MetaSearch gems.
 Your just create search form with `name_cont` or `created_at_gt` fields and ElasticRansack build a search query for you.
-It is compatible with most of the Ransack helper methods and predicates.
+It compatible with most of the Ransack predicates and helpers.
 
 [![Build Status](https://travis-ci.org/leschenko/elastic_ransack.png?branch=master)](https://travis-ci.org/leschenko/elastic_ransack)
 
 ElasticRansack uses [Tire](https://github.com/karmi/tire) and [Elasticsearch](http://www.elasticsearch.org/) for searching.
 
-Inspired by [Ransack](https://github.com/ernie/ransack) gem.
+Inspired by [Ransack](https://github.com/activerecord-hackery/ransack) gem.
 
 ## Installation
 
@@ -34,10 +34,25 @@ class User < ActiveRecord::Base
 end
 ```
 
-Search with `elastic_ransack` method. It return `Tire::Results::Collection` instance:
+ElasticRansack provides `#elastic_ransack` method for searching:
 
 ```ruby
-User.elastic_ransack({name_cont: 'alex', role_id_eq: 1, state_id_in: [2, 3], created_at_gt: 1.day.ago})
+User.elastic_ransack(name_cont: 'alex', role_id_eq: 1,
+                     state_id_in: [2, 3],
+                     created_at_gt: 1.day.ago)
+```
+
+It return `Tire::Results::Collection` instance like Tire gem.
+To return `ActiveRecord` objects you should add `:load` option:
+
+```ruby
+User.elastic_ransack({created_at_gt: 1.day.ago}, load: true)
+```
+
+To paginate your results:
+
+```ruby
+User.elastic_ransack({created_at_gt: 1.day.ago}, page: 2, per_page: 30)
 ```
 
 ### Options
