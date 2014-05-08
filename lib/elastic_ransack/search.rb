@@ -5,7 +5,7 @@ module ElasticRansack
 
     attr_reader :options, :search_options, :model, :search_results, :sorts, :globalize
 
-    delegate :results, :each, :each_with_hit, :empty?, :size, :[], to: :search_results
+    delegate :results, :each, :each_with_index, :each_with_hit, :empty?, :size, :[], to: :search_results
     delegate :total_entries, :per_page, :total_pages, :current_page, :previous_page, :next_page, :offset, :out_of_bounds?,
              to: :search_results
 
