@@ -5,6 +5,8 @@ require 'elastic_ransack'
 
 Elasticsearch::Model.client = Elasticsearch::Client.new host: "http://localhost:#{ENV['ES_PORT'] || 9200}", log: ENV['ES_LOG'], trace: ENV['ES_LOG']
 
+I18n.enforce_available_locales = false
+
 RSpec.configure do |config|
   config.expect_with :rspec do |c|
     c.syntax = [:should, :expect]
