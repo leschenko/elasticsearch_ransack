@@ -7,7 +7,7 @@ ElasticRansack provides searching to your elasticsearch models like Ransack or M
 Your just create search form with `name_cont` or `created_at_gt` fields and ElasticRansack build a search query for you.
 It compatible with most of the Ransack predicates and helpers.
 
-ElasticRansack uses [Tire](https://github.com/karmi/tire) and [Elasticsearch](http://www.elasticsearch.org/) for searching.
+ElasticRansack uses [Elasticsearch](http://www.elasticsearch.org/) and [elasticsearch-ruby](https://github.com/elasticsearch/elasticsearch-ruby) for searching.
 
 Inspired by [Ransack](https://github.com/activerecord-hackery/ransack) gem.
 
