@@ -17,7 +17,6 @@ test/version_tmp
 tmp
 
 .idea
-.rvmrc
 .rspec
 TODO
 elasticsearch.log
