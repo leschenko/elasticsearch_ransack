@@ -24,7 +24,7 @@ class ActiveModelBase
   define_model_callbacks :save, :destroy
 
   attr_reader :attributes
-  attr_accessor :id, :created_at
+  attr_accessor :id
 
   def initialize(attributes = {})
     @attributes = attributes
