@@ -35,7 +35,7 @@ class ActiveModelBase
   end
 
   def method_missing(id, *args, &block)
-    attributes[id.to_sym] || attributes[id.to_s] || super
+    attributes.has_key?(id) ? attributes[id] : super
   end
 
   def persisted?
