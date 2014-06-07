@@ -38,52 +38,56 @@ module ElasticRansack
 
     def search
       @search_results ||= begin
-        that = self
         query_string = []
-        tire.search(@search_options) do
-          and_filters = []
-          sort do
-            that.sorts.each do |s|
-              by s.name, s.dir
-            end
+        filters = []
+
+        options.each do |k, v|
+          next if v.blank?
+          v = ElasticRansack.normalize_integer_vals(k, v)
+
+          if k == 'q_cont' || k == 'q_eq'
+            query_string << "#{v.lucene_escape}" if v.present?
+            next
           end
 
-          that.options.each do |k, v|
-            next if v.blank?
-            v = ElasticRansack.normalize_integer_vals(k, v)
-
-            if k == 'q_cont' || k == 'q_eq'
-              query_string << "#{v.lucene_escape}" if v.present?
-              next
-            end
-
-            if k =~ /^(.+)_cont$/
-              attr = $1
-              attr = "#{$1.sub(/^translations_/, '')}_#{I18n.locale}" if that.globalize && attr =~ /^translations_(.+)/
-              attr_query = [
-                  v.split.map { |part| "#{attr}:*#{part.lucene_escape}*" }.join(' AND '),
-                  v.split.map { |part| "#{attr}:\"#{part.lucene_escape}\"" }.join(' AND ')
-              ]
-              query_string << attr_query.map { |q| "(#{q})" }.join(' OR ')
-              next
-            else
-              v = that.format_value(v)
-            end
-
-            ElasticRansack.predicates.each do |predicate|
-              if k =~ predicate.regexp
-                and_filters << predicate.query.call($1, v)
-                break
-              end
-            end
+          if k =~ /^(.+)_cont$/
+            attr = $1
+            attr = "#{$1.sub(/^translations_/, '')}_#{I18n.locale}" if globalize && attr =~ /^translations_(.+)/
+            attr_query = [
+                v.split.map { |part| "#{attr}:*#{part.lucene_escape}*" }.join(' AND '),
+                v.split.map { |part| "#{attr}:\"#{part.lucene_escape}\"" }.join(' AND ')
+            ]
+            query_string << attr_query.map { |q| "(#{q})" }.join(' OR ')
+            next
+          else
+            v = format_value(v)
           end
 
-          query { string query_string.join(' ') } unless query_string.blank?
-          filter(:and, filters: and_filters) unless and_filters.blank?
+          ElasticRansack.predicates.each do |predicate|
+            if k =~ predicate.regexp
+              filters << predicate.query.call($1, v)
+              break
+            end
+          end
         end
+
+        if query_string.blank?
+          query = {match_all: {}}
+        else
+          query = {query_string: {query: query_string.join(' ')}}
+        end
+
+        sort = sorts.map { |s| {s.name => s.dir} }
+
+        filter_query = {and: {filters: filters}}
+
+        per_page = @search_options[:per_page] || 50
+        page = @search_options[:page].presence || 1
+        from = per_page.to_i * (page.to_i - 1)
+
+        __elasticsearch__.search query: query, filter: filter_query, sort: sort, size: per_page, from: from
       end
     end
-
 
     def translate(*args)
       model.human_attribute_name(args.first)
