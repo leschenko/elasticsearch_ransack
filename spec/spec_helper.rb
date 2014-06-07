@@ -1,12 +1,17 @@
 require 'active_model'
-require 'tire'
+require 'elasticsearch/model'
 require 'active_support/core_ext'
 require 'elastic_ransack'
 
-Tire.configure do
-  logger 'elasticsearch.log'
-  url 'http://localhost:9200'
-  pretty 1
+Elasticsearch::Model.client = Elasticsearch::Client.new host: "http://localhost:#{ENV['ES_PORT'] || 9200}", log: ENV['ES_LOGGER'], trace: ENV['ES_LOGGER']
+
+RSpec.configure do |config|
+  config.expect_with :rspec do |c|
+    c.syntax = [:should, :expect]
+  end
+  config.mock_with :rspec do |mocks|
+    mocks.syntax = [:expect, :should]
+  end
 end
 
 class ActiveModelBase
@@ -52,8 +57,11 @@ end
 
 
 class ModelSearch < ActiveModelBase
-  include Tire::Model::Search
-  include Tire::Model::Callbacks
+  include Elasticsearch::Model
+  include Elasticsearch::Model::Adapter::ActiveRecord
+
+  after_save -> { __elasticsearch__.index_document }
+  after_destroy -> { __elasticsearch__.delete_document }
 
   include ElasticRansack::Model
 
@@ -63,10 +71,9 @@ class ModelSearch < ActiveModelBase
   end
 
   def self.setup_index
-    tire.index.delete
-    tire.create_elasticsearch_index
+    __elasticsearch__.create_index! force: true, index: index_name
     populate
-    tire.index.refresh
+    __elasticsearch__.refresh_index!
   end
 
   def self.test_data

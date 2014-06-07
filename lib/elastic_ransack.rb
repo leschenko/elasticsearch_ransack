@@ -1,4 +1,4 @@
-require 'tire'
+require 'elasticsearch/model'
 require 'elastic_ransack/version'
 require 'elastic_ransack/core_ext'
 require 'elastic_ransack/predicate'
