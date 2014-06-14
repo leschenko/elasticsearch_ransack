@@ -32,10 +32,6 @@ class ActiveModelBase
     @attributes = attributes
   end
 
-  def to_indexed_json
-    @attributes.to_json
-  end
-
   def method_missing(id, *args, &block)
     attributes.has_key?(id) ? attributes[id] : super
   end
