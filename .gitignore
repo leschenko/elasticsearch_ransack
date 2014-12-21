@@ -19,5 +19,7 @@ tmp
 .idea
 .rvmrc
 .rspec
+.ruby-gemset
+.ruby-version
 TODO
 elasticsearch.log
