@@ -1,7 +1,7 @@
 # ElasticRansack
 
-[![Build Status](https://travis-ci.org/leschenko/elastic_ransack.png?branch=master)](https://travis-ci.org/leschenko/elastic_ransack)
-[![Dependency Status](https://gemnasium.com/leschenko/elastic_ransack.png)](https://gemnasium.com/leschenko/elastic_ransack)
+[![Build Status](https://travis-ci.org/leschenko/elasticsearch_ransack.png?branch=master)](https://travis-ci.org/leschenko/elasticsearch_ransack)
+[![Dependency Status](https://gemnasium.com/leschenko/elasticsearch_ransack.png)](https://gemnasium.com/leschenko/elasticsearch_ransack)
 
 ElasticRansack provides searching to your elasticsearch models like Ransack or MetaSearch gems.
 Your just create search form with `name_cont` or `created_at_gt` fields and ElasticRansack build a search query for you.
