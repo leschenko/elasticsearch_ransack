@@ -70,6 +70,7 @@ User.elastic_ransack({created_at_gt: 1.day.ago}, page: 2, per_page: 30)
 * `_gteq`    greater or equal the value
 * `_lteq `   less or equal the value
 * `_not_eq`  not equal value
+* `_present`  non-null value, mapped to [exists filter](http://www.elastic.co/guide/en/elasticsearch/reference/current/query-dsl-exists-filter.html)
 
 ### Examples
 
