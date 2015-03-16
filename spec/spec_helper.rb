@@ -9,6 +9,8 @@ Tire.configure do
   pretty 1
 end
 
+I18n.enforce_available_locales = false
+
 class ActiveModelBase
   include ActiveModel::AttributeMethods
   include ActiveModel::Serialization
