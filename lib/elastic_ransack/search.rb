@@ -20,6 +20,7 @@ module ElasticRansack
       @model = model
       @options = options.stringify_keys
       @search_options = search_options || {}
+      @search_options[:escape_query] = true unless @search_options.has_key?(:escape_query)
       @sorts = []
       @globalize = @search_options.delete(:globalize)
       sorting = @options.delete('s')
@@ -40,6 +41,7 @@ module ElasticRansack
       @search_results ||= begin
         that = self
         query_string = []
+        escape_query = @search_options[:escape_query]
         tire.search(@search_options) do
           and_filters = []
           sort do
@@ -53,7 +55,8 @@ module ElasticRansack
             v = ElasticRansack.normalize_integer_vals(k, v)
 
             if k == 'q_cont' || k == 'q_eq'
-              query_string << "#{v.lucene_escape}" if v.present?
+              v = v.lucene_escape if escape_query
+              query_string << "#{v}" if v.present?
               next
             end
 
