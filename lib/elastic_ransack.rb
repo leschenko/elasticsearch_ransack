@@ -12,6 +12,7 @@ module ElasticRansack
   self.integer_fields_regexp = /id_/
   self.datetime_parser = Time.method(:parse)
 
+  FALSE_VALUES = ['', '0', 0, 'false', false]
   BASE_PREDICATES = [
       ['not_eq', {query: proc { |attr, v| {not: {term: {attr => v}} }}}],
       ['eq', {query: proc { |attr, v| {term: {attr => v}} }}],
@@ -21,8 +22,8 @@ module ElasticRansack
       ['lt', {query: proc { |attr, v| {range: {attr => {lt: v}}} }}],
       ['gteq', {query: proc { |attr, v| {range: {attr => {gte: v}}} }}],
       ['lteq', {query: proc { |attr, v| {range: {attr => {lte: v}}} }}],
-      ['null', {query: proc { |attr| {missing: {field: attr}} }}],
-      ['present', {query: proc { |attr| {exists: {field: attr}} }}]
+      ['null', {query: proc { |attr, v| {(FALSE_VALUES.include?(v) ? :exists : :missing) =>  {field: attr}} }}],
+      ['present', {query: proc { |attr, v| {(FALSE_VALUES.include?(v) ? :missing : :exists) => {field: attr}} }}]
   ]
 
 

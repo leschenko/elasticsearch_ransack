@@ -98,12 +98,36 @@ describe 'predicates' do
     @model.elastic_ransack(int_attr_lteq: 20).map(&:id).map(&:to_i).should =~ [1, 2]
   end
 
-  it '_null' do
-    @model.elastic_ransack(missing_attr_null: true).map(&:id).map(&:to_i).should =~ [1, 2]
+  describe '_null' do
+    it 'accept boolean argument' do
+      @model.elastic_ransack(missing_attr_null: true).map(&:id).map(&:to_i).should =~ [1, 2]
+    end
+
+    it 'accept "0" as false' do
+      @model.elastic_ransack(missing_attr_null: '0').map(&:id).map(&:to_i).should =~ [3]
+    end
   end
 
-  it '_present' do
-    @model.elastic_ransack(missing_attr_present: true).map(&:id).map(&:to_i).should =~ [3]
+  describe '_present' do
+    it 'accept boolean argument' do
+      @model.elastic_ransack(missing_attr_present: true).map(&:id).map(&:to_i).should =~ [3]
+    end
+
+    it 'accept "1" as true' do
+      @model.elastic_ransack(missing_attr_present: '1').map(&:id).map(&:to_i).should =~ [3]
+    end
+
+    it 'accept "0" as false' do
+      @model.elastic_ransack(missing_attr_present: '0').map(&:id).map(&:to_i).should =~ [1, 2]
+    end
+
+    it 'accept 0 as false' do
+      @model.elastic_ransack(missing_attr_present: 0).map(&:id).map(&:to_i).should =~ [1, 2]
+    end
+
+    it 'accept "" as false' do
+      @model.elastic_ransack(missing_attr_present: '0').map(&:id).map(&:to_i).should =~ [1, 2]
+    end
   end
 
   it '_not_eq' do
