@@ -1,6 +1,6 @@
 # ElasticRansack
 
-[![Build Status](https://travis-ci.org/leschenko/elastic_ransack.png?branch=master)](https://travis-ci.org/leschenko/elastic_ransack)
+[![Build Status](https://travis-ci.org/leschenko/elasticsearch_ransack.png?branch=elasticsearch-ruby)](https://travis-ci.org/leschenko/elasticsearch_ransack)
 [![Dependency Status](https://gemnasium.com/leschenko/elastic_ransack.png)](https://gemnasium.com/leschenko/elastic_ransack)
 
 ElasticRansack provides searching to your elasticsearch models like Ransack or MetaSearch gems.
