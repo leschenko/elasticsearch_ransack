@@ -28,8 +28,10 @@ module ElasticRansack
         add_sort('_score', 'desc')
         add_sort('id', 'desc')
       else
-        sorting_split = sorting.split(/\s+/, 2)
-        add_sort(sorting_split[0], sorting_split[1] || 'asc')
+        sorting_split = sorting.split(/\s+/)
+        sorting_split.each_slice(2) do |sort|
+          add_sort(sort[0], sort[1] || 'asc')
+        end
       end
     end
 
