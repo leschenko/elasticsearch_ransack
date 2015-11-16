@@ -43,8 +43,17 @@ module ElasticRansack
       #   Product.elastic_ransack({translations_name_cont: 'chair'}, globalize: true)
       #
       def elastic_ransack(options={}, search_options={})
+        escape_query_on_parse_exception = search_options.delete(:escape_query_on_parse_exception)
+        search_options[:escape_query] = false if escape_query_on_parse_exception
         elastic_ransack = Search.new(self, options, search_options)
-        elastic_ransack.search
+        begin
+          elastic_ransack.search
+        rescue => e
+          if escape_query_on_parse_exception && e.message.include?('SearchParseException')
+            elastic_ransack.search_options[:escape_query] = true
+            elastic_ransack.search
+          end
+        end
         elastic_ransack
       end
     end
