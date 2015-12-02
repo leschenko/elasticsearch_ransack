@@ -52,6 +52,8 @@ module ElasticRansack
           if escape_query_on_parse_exception && e.message.include?('SearchParseException')
             elastic_ransack.search_options[:escape_query] = true
             elastic_ransack.search
+          else
+            raise
           end
         end
         elastic_ransack
