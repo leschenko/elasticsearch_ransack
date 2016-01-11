@@ -10,6 +10,5 @@ env:
   - JRUBY_OPTS="-Xcext.enabled=true"
 
 rvm:
-  - 1.9.3
   - jruby-19mode
   - 2.3.0
